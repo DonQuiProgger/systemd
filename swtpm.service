@@ -1,0 +1,11 @@
+[Unit]
+Description=Software tpm for virtual machines
+
+[Service]
+Type=simple
+Restart=on-success
+Environment="RUN=%h/.runtime"
+ExecStart=/usr/bin/swtpm socket --tpm2 --tpmstate dir=${RUN} --ctrl type=unixio,path=${RUN}/swtpm-sock --log level=20
+
+[Install]
+WantedBy=default.target
